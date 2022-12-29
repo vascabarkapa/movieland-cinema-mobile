@@ -4,10 +4,10 @@
     "slug": "movieland-cinema-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/movieland_icon.png",
+    "icon": "./assets/icons/movieland_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/loading_screen.png",
+      "image": "./assets/icons/loading_screen.png",
       "resizeMode": "contain",
       "backgroundColor": "#111827"
     },
@@ -22,12 +22,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/movieland_adaptive_icon.png",
+        "foregroundImage": "./assets/icons/movieland_adaptive_icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icons/favicon.png"
     }
   }
 }
