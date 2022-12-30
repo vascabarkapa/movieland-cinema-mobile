@@ -29,12 +29,12 @@ const Tabs = () => {
                 height: '7%',
             },
             tabBarIcon: ({focused}) => {
-                const tintColor = focused ? COLORS.primary : COLORS.secondary;
+                const tintColor = focused ? COLORS.secondary : COLORS.primary;
 
                 switch (route.name) {
                     case "Home":
                         return (
-                            <Text>Home</Text>
+                            <Text style={{color: tintColor}}>Home</Text>
                         )
                     case "Repertory":
                         return (
@@ -42,7 +42,7 @@ const Tabs = () => {
                         )
                     case "About":
                         return (
-                            <Text>About</Text>
+                            <Text style={{color: tintColor}}>About</Text>
                         )
                 }
             }
