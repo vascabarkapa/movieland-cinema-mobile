@@ -1,21 +1,33 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {COLORS} from "../constants";
-import {Text} from "react-native";
-import {Home} from "../screens";
+import {Text, View} from "react-native";
+import {About, Home, Repertory} from "../screens";
 
 const Tab = createBottomTabNavigator();
 
-const tabOptions = {
-    showLabel: false,
-    style: {
-        height: '10%',
-    }
+const RepertoryButton = () => {
+    return (
+        <View style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 100,
+            height: 100,
+            borderRadius: 50,
+            backgroundColor: COLORS.secondary
+        }}>
+            <Text>A</Text>
+        </View>
+    )
 }
 
 const Tabs = () => {
     return (
-        <Tab.Navigator tabBarOptions={tabOptions} screenOptions={({route}) => ({
+        <Tab.Navigator screenOptions={({route}) => ({
+            tabBarShowLabel: false,
+            tabBarStyle: {
+                height: '7%',
+            },
             tabBarIcon: ({focused}) => {
                 const tintColor = focused ? COLORS.primary : COLORS.secondary;
 
@@ -26,7 +38,7 @@ const Tabs = () => {
                         )
                     case "Repertory":
                         return (
-                            <Text>Repertory</Text>
+                            <RepertoryButton/>
                         )
                     case "About":
                         return (
@@ -36,8 +48,10 @@ const Tabs = () => {
             }
         })}>
             <Tab.Screen name="Home" component={Home}/>
-            <Tab.Screen name="Repertory" component={Home}/>
-            <Tab.Screen name="About" component={Home}/>
+            <Tab.Screen name="Repertory" component={Repertory}/>
+            <Tab.Screen name="About" component={About}/>
         </Tab.Navigator>
     )
 }
+
+export default Tabs;
