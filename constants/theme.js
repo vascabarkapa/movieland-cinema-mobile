@@ -6,7 +6,8 @@ export const COLORS = {
     // base colors
     primary: '#1E293B',
     secondary: '#4f46e5',
-    third: '#111827',
+    default: '#111827',
+    white: '#FFFFFF'
 }
 
 export const SIZES = {
