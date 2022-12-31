@@ -31,7 +31,7 @@ const Tabs = () => {
                 switch (route.name) {
                     case "Home":
                         return (
-                            <Image source={icons.home} resizeMode='contain'
+                            <Image source={icons.hut} resizeMode='contain'
                                    style={{tintColor: tintColor, width: 25, height: 25}}/>
                         )
                     case "Repertory":
