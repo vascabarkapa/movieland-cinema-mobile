@@ -1,7 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {COLORS} from "../constants";
-import {Image, Text, View} from "react-native";
+import {COLORS, icons} from "../constants";
+import {Image, View} from "react-native";
 import {About, Home, Repertory} from "../screens";
 
 const Tab = createBottomTabNavigator();
@@ -15,19 +15,11 @@ const RepertoryButton = ({tintColor}) => {
             height: 100,
             borderRadius: 50,
             borderColor: COLORS.secondary,
-            borderWidth: 2,
             backgroundColor: COLORS.default,
-            shadowColor: COLORS.secondary,
-            shadowOffset: {
-                width: 100,
-                height: 100,
-            },
-            shadowOpacity: 1,
-            shadowRadius: 0,
-            elevation: 25,
+            borderWidth: 2,
         }}>
             <Image source={require('../assets/icons/movieland_icon.png')}
-                   style={{height: 50, width: 50, tintColor: tintColor}} resizeMode='contain'/>
+                   style={{height: 50, width: 50, tintColor: tintColor, top: -4}} resizeMode='contain'/>
         </View>
     )
 }
@@ -37,7 +29,7 @@ const Tabs = () => {
         <Tab.Navigator screenOptions={({route}) => ({
             tabBarShowLabel: false,
             tabBarStyle: {
-                height: '7%',
+                height: '6%',
                 backgroundColor: COLORS.default
             },
             tabBarIcon: ({focused}) => {
@@ -46,7 +38,8 @@ const Tabs = () => {
                 switch (route.name) {
                     case "Home":
                         return (
-                            <Text style={{color: tintColor}}>Home</Text>
+                            <Image source={icons.home} resizeMode='contain'
+                                   style={{tintColor: tintColor, width: 25, height: 25}}/>
                         )
                     case "Repertory":
                         return (
@@ -54,7 +47,8 @@ const Tabs = () => {
                         )
                     case "About":
                         return (
-                            <Text style={{color: tintColor}}>About</Text>
+                            <Image source={icons.info} resizeMode='contain'
+                                   style={{tintColor: tintColor, width: 30, height: 30}}/>
                         )
                 }
             }
