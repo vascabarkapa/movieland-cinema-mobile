@@ -3,6 +3,11 @@ import {Text, View, StyleSheet, Image} from "react-native";
 import MapView, {Marker} from "react-native-maps";
 import {COLORS, icons} from "../../constants";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import {useFonts} from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import AppLoading from "expo-app-loading";
+
+SplashScreen.preventAutoHideAsync();
 
 const MAP_REGION = {
     latitude: 43.736956,
@@ -15,6 +20,15 @@ const marker_LAT = 43.737070;
 const marker_LNG = 18.568478;
 
 const About = () => {
+    const [fontLoaded] = useFonts({
+        'Poppins-Regular': require('./../../assets/fonts/Poppins-Regular.ttf'),
+        'Poppins-Bold': require('./../../assets/fonts/Poppins-Bold.ttf')
+    });
+
+    if (!fontLoaded) {
+        return <AppLoading/>
+    }
+
     return (
         <View style={styles.container}>
             <MapView style={styles.map}
@@ -67,34 +81,39 @@ const styles = StyleSheet.create({
     movLogo: {
         height: 120,
         width: 120,
-        marginTop: 25
+        marginTop: 20
     },
     header: {
-        fontWeight: 'bold',
         fontSize: 30,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Poppins-Bold',
+        marginBottom: -10
     },
     locationDescription: {
-        fontSize: 20,
-        textAlign: 'center'
+        fontSize: 18,
+        textAlign: 'center',
+        fontFamily: 'Poppins-Regular'
     },
     contactDescription: {
         fontSize: 16,
         textAlign: 'center',
+        fontFamily: 'Poppins-Regular',
         borderBottomWidth: 1,
         marginLeft: 10,
         marginRight: 10,
         paddingBottom: 10,
         borderColor: COLORS.secondary,
-        marginBottom: 20
+        marginBottom: 15
     },
     workTimeHeader: {
-        fontSize: 18,
-        textAlign: 'center',
-    },
-    workTimeDescription: {
         fontSize: 16,
         textAlign: 'center',
+        fontFamily: 'Poppins-Regular'
+    },
+    workTimeDescription: {
+        fontSize: 14,
+        textAlign: 'center',
+        fontFamily: 'Poppins-Regular'
     }
 });
 
