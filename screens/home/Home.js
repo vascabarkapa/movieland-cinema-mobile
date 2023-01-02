@@ -1,8 +1,23 @@
 import React from 'react';
 import {ImageBackground, Text, View, StyleSheet} from "react-native";
 import {COLORS, images} from "../../constants";
+import {useFonts} from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import AppLoading from "expo-app-loading";
+
+SplashScreen.preventAutoHideAsync();
 
 const Home = () => {
+    const [fontLoaded] = useFonts({
+        'Poppins-Regular': require('./../../assets/fonts/Poppins-Regular.ttf'),
+        'Poppins-Bold': require('./../../assets/fonts/Poppins-Bold.ttf'),
+        'Poppins-Italic': require('./../../assets/fonts/Poppins-Italic.ttf')
+    });
+
+    if (!fontLoaded) {
+        return <AppLoading/>
+    }
+
     return (
         <View style={styles.container}>
             <ImageBackground source={images.welcomeScreen} resizeMode='cover'
@@ -33,23 +48,25 @@ const styles = StyleSheet.create({
     welcomeHeader: {
         color: COLORS.white,
         fontSize: 50,
-        fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 200
+        lineHeight: 50,
+        marginTop: 230,
+        fontFamily: 'Poppins-Bold'
     },
     welcomeInfo: {
         color: COLORS.white,
         textAlign: 'right',
         width: '60%',
-        marginTop: 20,
-        fontSize: 20
+        marginTop: 12,
+        fontSize: 18,
+        fontFamily: 'Poppins-Regular'
     },
     welcomeCards: {
         color: COLORS.white,
         textAlign: 'center',
-        marginTop: 25,
-        fontSize: 10,
-        fontStyle: 'italic'
+        marginTop: 20,
+        fontSize: 8,
+        fontFamily: 'Poppins-Italic'
     }
 })
 
