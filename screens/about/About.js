@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Text, View, StyleSheet, Image} from "react-native";
 import MapView, {Marker} from "react-native-maps";
 import {COLORS, icons} from "../../constants";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import AppLoading from "expo-app-loading";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -20,17 +19,23 @@ const marker_LAT = 43.737070;
 const marker_LNG = 18.568478;
 
 const About = () => {
-    const [fontLoaded] = useFonts({
+    const [fontsLoaded] = useFonts({
         'Poppins-Regular': require('./../../assets/fonts/Poppins-Regular.ttf'),
         'Poppins-Bold': require('./../../assets/fonts/Poppins-Bold.ttf')
     });
 
-    if (!fontLoaded) {
-        return <AppLoading/>
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded) {
+            await SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded]);
+
+    if (!fontsLoaded) {
+        return null;
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
             <MapView style={styles.map}
                      initialRegion={MAP_REGION}
             >

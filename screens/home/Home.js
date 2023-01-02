@@ -1,25 +1,30 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {ImageBackground, Text, View, StyleSheet} from "react-native";
 import {COLORS, images} from "../../constants";
 import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import AppLoading from "expo-app-loading";
 
 SplashScreen.preventAutoHideAsync();
 
 const Home = () => {
-    const [fontLoaded] = useFonts({
+    const [fontsLoaded] = useFonts({
         'Poppins-Regular': require('./../../assets/fonts/Poppins-Regular.ttf'),
         'Poppins-Bold': require('./../../assets/fonts/Poppins-Bold.ttf'),
         'Poppins-Italic': require('./../../assets/fonts/Poppins-Italic.ttf')
     });
 
-    if (!fontLoaded) {
-        return <AppLoading/>
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded) {
+            await SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded]);
+
+    if (!fontsLoaded) {
+        return null;
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
             <ImageBackground source={images.welcomeScreen} resizeMode='cover'
                              style={styles.imageBackground}>
                 <Text style={styles.welcomeHeader}>Welcome
