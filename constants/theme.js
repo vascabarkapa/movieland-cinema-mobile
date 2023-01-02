@@ -11,11 +11,6 @@ export const COLORS = {
 }
 
 export const SIZES = {
-    // global
-
-    // font
-
-    // app
     width,
     height
 }
