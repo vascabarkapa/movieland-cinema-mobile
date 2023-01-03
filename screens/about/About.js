@@ -49,14 +49,14 @@ const About = () => {
                     <Image source={icons.movieland} style={styles.movLogo}/>
                 </View>
                 <Text style={styles.header}>Movieland Cinema</Text>
-                <Text style={styles.locationDescription}><Ionicons name="location" size={20} color={COLORS.secondary}/>Olimpijska
+                <Text style={styles.locationDescription}><Ionicons name="location" size={20} color={COLORS.secondary}/>&nbsp;Olimpijska
                     bb,{'\n'}Jahorina, Bosnia and
                     Herzegovina</Text>
                 <Text style={styles.contactDescription}><Ionicons name="mail" size={16}
-                                                                  color={COLORS.secondary}/>info@movieland.com&nbsp;&nbsp;
+                                                                  color={COLORS.secondary}/>&nbsp;info@movieland.com&nbsp;&nbsp;
                     <Ionicons
-                        name="call" size={16} color={COLORS.secondary}/>+38757000111</Text>
-                <Text style={styles.workTimeHeader}><Ionicons name="alarm" size={18} color={COLORS.secondary}/>Work
+                        name="call" size={16} color={COLORS.secondary}/>&nbsp;+38757000111</Text>
+                <Text style={styles.workTimeHeader}><Ionicons name="alarm" size={18} color={COLORS.secondary}/>&nbsp;Work
                     time</Text>
                 <Text style={styles.workTimeDescription}>Monday - Thursday: 18:00 - 22:00</Text>
                 <Text style={styles.workTimeDescription}>Friday - Sunday: 18:00 - 23:00</Text>
