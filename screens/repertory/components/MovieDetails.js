@@ -28,7 +28,7 @@ const MovieDetails = ({route, navigation}) => {
                 Total Price: ${selectedMovie.price * ticketQuantity}
             </Text>
             <TouchableOpacity onPress={purchase} style={styles.button}>
-                <Text style={buttonText}>Buy Now</Text>
+                <Text style={styles.buttonText}>Buy Now</Text>
             </TouchableOpacity>
         </View>
     )

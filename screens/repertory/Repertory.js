@@ -1,9 +1,12 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image, FlatList, StatusBar} from "react-native";
+import {Text, View, StyleSheet, Image, FlatList, StatusBar, TouchableOpacity} from "react-native";
 import {images} from "../../constants";
 import repertoryDB from "../../repertoryDB";
+import {useNavigation} from "@react-navigation/native";
 
 const Repertory = () => {
+    const navigation = useNavigation();
+
     const movies = ({item}) => {
         return (
             <View style={styles.movies}>
@@ -20,9 +23,13 @@ const Repertory = () => {
                     <Text style={styles.moviePrice}>
                         Price: {item.price}
                     </Text>
-                    <Text style={styles.movieButton}>
-                        DETAILS
-                    </Text>
+                    <TouchableOpacity onPress={() => {
+                        navigation.navigate('MovieDetails', {movieId: item.id});
+                    }}>
+                        <Text style={styles.movieButton}>
+                            DETAILS
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
