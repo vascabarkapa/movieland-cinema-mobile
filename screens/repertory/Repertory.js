@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
     infoRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft:10,
-        marginRight:10,
+        marginLeft: 10,
+        marginRight: 10,
     },
     moviePrice: {
         textAlign: 'center',
@@ -147,8 +147,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginLeft: 110,
         marginRight: 110,
-        paddingTop:3,
-        paddingBottom:3,
+        paddingTop: 3,
+        paddingBottom: 3,
         color: COLORS.white,
         backgroundColor: COLORS.secondary,
     },
