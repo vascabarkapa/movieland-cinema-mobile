@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {ImageBackground, Text, View, StyleSheet} from "react-native";
+import {ImageBackground, Text, View, StyleSheet, StatusBar} from "react-native";
 import {COLORS, images} from "../../constants";
 import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -24,22 +24,25 @@ const Home = () => {
     }
 
     return (
-        <View style={styles.container} onLayout={onLayoutRootView}>
-            <ImageBackground source={images.welcomeScreen} resizeMode='cover'
-                             style={styles.imageBackground}>
-                <Text style={styles.welcomeHeader}>Welcome
-                    to{'\n'}our cinema</Text>
-                <Text style={styles.welcomeInfo}>Following
-                    the
-                    modern times and
-                    adapting the
-                    film industry to today's
-                    digital devices,
-                    Movieland Cinema offers you unforgettable film experiences.</Text>
-                <Text style={styles.welcomeCards}>Search
-                    available movies at the cinema and buy tickets online quickly and easily!</Text>
-            </ImageBackground>
-        </View>
+        <>
+            <StatusBar translucent={true} backgroundColor='transparent'/>
+            <View style={styles.container} onLayout={onLayoutRootView}>
+                <ImageBackground source={images.welcomeScreen} resizeMode='cover'
+                                 style={styles.imageBackground}>
+                    <Text style={styles.welcomeHeader}>Welcome
+                        to{'\n'}our cinema</Text>
+                    <Text style={styles.welcomeInfo}>Following
+                        the
+                        modern times and
+                        adapting the
+                        film industry to today's
+                        digital devices,
+                        Movieland Cinema offers you unforgettable film experiences.</Text>
+                    <Text style={styles.welcomeCards}>Search
+                        available movies at the cinema and buy tickets online quickly and easily!</Text>
+                </ImageBackground>
+            </View>
+        </>
     )
 }
 
