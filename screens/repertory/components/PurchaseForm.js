@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {Text, View, StyleSheet, TextInput, ScrollView, TouchableOpacity} from "react-native";
+import {Text, View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Alert} from "react-native";
 import {useFonts} from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import {COLORS} from "../../../constants";
@@ -50,6 +50,17 @@ const PurchaseForm = ({route, navigation}) => {
         console.log('cardNumber:', cardNumber);
         console.log('expiryDate:', expiryDate);
         console.log('ccvNumber:', ccvNumber);
+
+        Alert.alert(
+            'Successful Purchase',
+            'Movie ticket purchase is successful. The transaction will be completed shortly and you will receive an email with further information and printable tickets.\n' +
+            '\n' +
+            'Thank you for using our services!',
+            [
+                {text: 'Ok', onPress: () => navigation.navigate('Repertory')},
+            ],
+            {cancelable: false}
+        );
     }
 
     const back = () => {
