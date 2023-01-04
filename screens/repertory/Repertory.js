@@ -39,7 +39,7 @@ const Repertory = () => {
                             {item.name}
                         </Text>
                         <Text style={styles.movieRating}>
-                            <Ionicons name="star" size={18} color={COLORS.secondary}/>&nbsp;{item.rating}
+                            <Ionicons name="star" size={18} color={COLORS.secondary}/>&nbsp;{item.rating.toFixed(1)}
                         </Text>
                     </View>
                     <Text style={styles.movieDescription} numberOfLines={2} ellipsizeMode='tail'>
