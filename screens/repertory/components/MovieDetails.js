@@ -9,7 +9,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 SplashScreen.preventAutoHideAsync();
 
 const MovieDetails = ({route, navigation}) => {
-    const [ticketQuantity, setTicketQuantity] = useState(1);
+    const [numberOfTickets, setNumberOfTickets] = useState(1);
     const {movieId} = route.params;
     const selectedMovie = repertoryDB.find(movies => movies.id === movieId);
 
@@ -29,7 +29,7 @@ const MovieDetails = ({route, navigation}) => {
     }
 
     const purchase = () => {
-        navigation.navigate('PurchaseForm');
+        navigation.navigate('PurchaseForm', {selectedMovie, numberOfTickets});
     }
 
     const back = () => {
@@ -72,11 +72,11 @@ const MovieDetails = ({route, navigation}) => {
                 <View style={styles.purchaseRow}>
                     <View style={styles.rowDirection}>
                         <Text style={styles.quantity}>Number of tickets: </Text>
-                        <TextInput style={styles.quantityInput} onChangeText={quantity => setTicketQuantity(quantity)}
-                                   value={ticketQuantity.toString()} selectTextOnFocus={true} keyboardType='numeric'/>
+                        <TextInput style={styles.quantityInput} onChangeText={num => setNumberOfTickets(num)}
+                                   value={numberOfTickets.toString()} selectTextOnFocus={true} keyboardType='numeric'/>
                     </View>
                     <Text style={styles.price}>
-                        Total Price: ${(selectedMovie.price * ticketQuantity).toFixed(2)}
+                        Total Price:&nbsp;{(selectedMovie.price * numberOfTickets).toFixed(2)}&euro;
                     </Text>
                 </View>
                 <View style={styles.buttonRow}>
