@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import repertoryDB from "../../../repertoryDB";
-import {Alert, Image, Text, TextInput, TouchableOpacity, View, StyleSheet} from "react-native";
+import {Image, Text, TextInput, TouchableOpacity, View, StyleSheet} from "react-native";
 import {COLORS} from "../../../constants";
 import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -29,9 +29,7 @@ const MovieDetails = ({route, navigation}) => {
     }
 
     const purchase = () => {
-        let price = selectedMovie.price * ticketQuantity;
-        Alert.alert(`Your cost is ${price}`);
-        navigation.navigate('Home');
+        navigation.navigate('PurchaseForm');
     }
 
     const back = () => {
