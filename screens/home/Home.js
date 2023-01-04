@@ -25,7 +25,7 @@ const Home = () => {
 
     return (
         <>
-            <StatusBar translucent={true} backgroundColor='transparent'/>
+            <StatusBar translucent backgroundColor="transparent"/>
             <View style={styles.container} onLayout={onLayoutRootView}>
                 <ImageBackground source={images.welcomeScreen} resizeMode='cover'
                                  style={styles.imageBackground}>

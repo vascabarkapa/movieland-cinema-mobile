@@ -153,7 +153,7 @@ const PurchaseForm = ({route, navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 40,
+        paddingTop: 40,
         backgroundColor: COLORS.white
     },
     header: {

@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Text, View, StyleSheet, Image, FlatList, TouchableOpacity, StatusBar} from "react-native";
+import {Text, View, StyleSheet, Image, FlatList, TouchableOpacity} from "react-native";
 import {COLORS} from "../../constants";
 import repertoryDB from "../../repertoryDB";
 import {useNavigation} from "@react-navigation/native";
@@ -67,7 +67,6 @@ const Repertory = () => {
 
     return (
         <>
-            <StatusBar backgroundColor={COLORS.gray}/>
             <View style={styles.container}>
                 <Text style={styles.header}>This week in the repertory</Text>
                 <FlatList data={repertoryDB} renderItem={movies} keyExtractor={(item) => item.id}/>

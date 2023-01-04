@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: 'column',
-        paddingTop: 10
+        paddingTop: 40,
+        backgroundColor: COLORS.white
     },
     secondContainer: {
         backgroundColor: COLORS.white,
