@@ -73,6 +73,7 @@ const MovieDetails = ({route, navigation}) => {
                     <View style={styles.rowDirection}>
                         <Text style={styles.quantity}>Number of tickets: </Text>
                         <TextInput style={styles.quantityInput} onChangeText={num => setNumberOfTickets(num)}
+                                   selectionColor={COLORS.secondary}
                                    value={numberOfTickets.toString()} selectTextOnFocus={true} keyboardType='numeric'/>
                     </View>
                     <Text style={styles.price}>
