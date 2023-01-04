@@ -121,10 +121,10 @@ const styles = StyleSheet.create({
     purchaseRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 10,
+        marginTop: 15,
         paddingLeft: 15,
         paddingRight: 15,
-        marginBottom:20
+        marginBottom: 15
     },
     rowDirection: {
         flexDirection: 'row',
