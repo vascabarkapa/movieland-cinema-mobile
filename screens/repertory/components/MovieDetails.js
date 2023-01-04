@@ -4,6 +4,7 @@ import {Alert, Image, Text, TextInput, TouchableOpacity, View, StyleSheet} from 
 import {COLORS} from "../../../constants";
 import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -33,65 +34,168 @@ const MovieDetails = ({route, navigation}) => {
         navigation.navigate('Home');
     }
 
+    const back = () => {
+        navigation.navigate('Repertory');
+    }
+
     return (
         <View style={styles.container} onLayout={onLayoutRootView}>
-            <Text style={styles.title}>
-                {selectedMovie.name}
-            </Text>
             <Image style={styles.image} source={selectedMovie.image}/>
-            <Text style={styles.description}>
-                {selectedMovie.description}
-            </Text>
-            <View style={styles.purchaseRow}>
-                <Text style={styles.description}>Quantity: </Text>
-                <TextInput style={styles.quantityInput} onChangeText={quantity => setTicketQuantity(quantity)}
-                           value={ticketQuantity.toString()} selectTextOnFocus={true} keyboardType='numeric'/>
+            <View style={styles.secondContainer}>
+                <View style={styles.mainRow}>
+                    <Text style={styles.title}>
+                        {selectedMovie.name}
+                    </Text>
+                    <Text style={styles.duration}>
+                        {selectedMovie.duration}
+                    </Text>
+                </View>
+                <View style={styles.mainRow}>
+                    <Text style={styles.genre}>
+                        {selectedMovie.genre}
+                    </Text>
+                    <Text style={styles.rating}>
+                        <Ionicons name="star" size={14}
+                                  color={COLORS.secondary}/>&nbsp;{selectedMovie.rating.toFixed(1)}
+                    </Text>
+                </View>
+                <View style={styles.secondaryRow}>
+                    <Text style={styles.direction}>
+                        <Text style={styles.boldText}>Direction:&nbsp;</Text><Text>{selectedMovie.direction}</Text>
+                    </Text>
+                    <Text style={styles.actors}>
+                        <Text style={styles.boldText}>Actors:&nbsp;</Text><Text>{selectedMovie.actors}</Text>
+                    </Text>
+                </View>
+                <Text style={styles.description}>
+                    {selectedMovie.description}
+                </Text>
+                <View style={styles.descriptionContainer}></View>
+                <View style={styles.purchaseRow}>
+                    <View style={styles.rowDirection}>
+                        <Text style={styles.quantity}>Number of tickets: </Text>
+                        <TextInput style={styles.quantityInput} onChangeText={quantity => setTicketQuantity(quantity)}
+                                   value={ticketQuantity.toString()} selectTextOnFocus={true} keyboardType='numeric'/>
+                    </View>
+                    <Text style={styles.price}>
+                        Total Price: ${(selectedMovie.price * ticketQuantity).toFixed(2)}
+                    </Text>
+                </View>
+                <View style={styles.buttonRow}>
+                    <TouchableOpacity onPress={back} style={styles.buttonBack}>
+                        <Text style={styles.buttonText}>Back</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={purchase} style={styles.buttonBuy}>
+                        <Text style={styles.buttonText}>Buy Now</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <Text style={styles.price}>
-                Total Price: ${selectedMovie.price * ticketQuantity}
-            </Text>
-            <TouchableOpacity onPress={purchase} style={styles.button}>
-                <Text style={styles.buttonText}>Buy Now</Text>
-            </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    boldText: {
+        fontFamily: 'Poppins-Bold'
+    },
     container: {
         flexDirection: 'column',
-        alignItems: 'center',
         paddingTop: 10
     },
-    purchaseRow: {
+    secondContainer: {
+        backgroundColor: COLORS.white,
+        width: '100%',
+        paddingTop: 10,
+        top: -20,
+        borderRadius: 20,
+        paddingBottom: 2000
+    },
+    mainRow: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
         flexDirection: 'row'
     },
-    button: {
-        backgroundColor: COLORS.secondary,
-        width: '40%',
-        borderRadius: 20,
+    secondaryRow: {
+        marginLeft: 15
+    },
+    purchaseRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
+        paddingLeft: 15,
+        paddingRight: 15,
+        marginBottom:20
+    },
+    rowDirection: {
+        flexDirection: 'row',
     },
     title: {
-        marginTop: 30,
+        marginLeft: 15,
         fontFamily: 'Poppins-Bold',
-        paddingTop: 10,
+        textTransform: 'uppercase',
+        fontSize: 20,
+        justifyContent: 'flex-start'
+    },
+    duration: {
+        marginRight: 15,
+        fontFamily: 'Poppins-Regular',
     },
     image: {
         width: '100%',
         height: 360,
     },
+    genre: {
+        marginLeft: 15,
+        fontFamily: 'Poppins-Regular',
+    },
+    rating: {
+        marginRight: 15,
+        fontFamily: 'Poppins-Bold',
+    },
+    direction: {
+        fontFamily: 'Poppins-Regular',
+    },
+    actors: {
+        fontFamily: 'Poppins-Regular',
+    },
+    descriptionContainer: {
+        borderBottomWidth: 2,
+        borderColor: COLORS.secondary,
+        marginBottom: 10,
+        marginLeft: 10,
+        marginRight: 10,
+    },
     description: {
         fontFamily: 'Poppins-Regular',
         textAlignVertical: 'center',
-        paddingTop: 5,
-        textAlign: 'left',
+        marginTop: 20,
+        textAlign: 'justify',
         fontWeight: '600',
-        padding: 10
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingBottom: 10,
     },
     price: {
         paddingTop: 5,
         paddingBottom: 10,
         fontFamily: 'Poppins-Bold',
+    },
+    buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonBuy: {
+        backgroundColor: COLORS.secondary,
+        width: '30%',
+        borderRadius: 20,
+        marginLeft: 10,
+    },
+    buttonBack: {
+        backgroundColor: COLORS.primary,
+        width: '30%',
+        borderRadius: 20,
+        marginRight: 10,
     },
     buttonText: {
         fontFamily: 'Poppins-Bold',
@@ -100,6 +204,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 5,
     },
+    quantity: {
+        fontFamily: 'Poppins-Regular',
+        paddingTop: 5,
+        paddingBottom: 10,
+    },
     quantityInput: {
         fontFamily: 'Poppins-Regular',
         borderWidth: 1,
@@ -107,9 +216,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         height: 32,
         width: 80,
-        marginLeft: 25,
-        paddingLeft:10,
-        paddingTop:2
+        paddingLeft: 10,
+        paddingTop: 2
     }
 })
 
