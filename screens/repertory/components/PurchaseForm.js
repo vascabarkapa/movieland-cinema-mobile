@@ -51,6 +51,18 @@ const PurchaseForm = ({route, navigation}) => {
         console.log('expiryDate:', expiryDate);
         console.log('ccvNumber:', ccvNumber);
 
+        if (firstName === '' || lastName === '' || email === '' || phoneNumber === '' || address === '' || city === '' || country === '' || cardType === '' || cardNumber === '' || expiryDate === '' || ccvNumber === '') {
+            Alert.alert(
+                'Error',
+                'Please enter all fields to purchase tickets!',
+                [
+                    {text: 'Ok'},
+                ],
+                {cancelable: false}
+            );
+            return;
+        }
+
         Alert.alert(
             'Successful Purchase',
             'Movie ticket purchase is successful. The transaction will be completed shortly and you will receive an email with further information and printable tickets.\n' +
