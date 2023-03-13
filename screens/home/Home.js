@@ -58,21 +58,21 @@ const styles = StyleSheet.create({
         fontSize: 50,
         textAlign: 'center',
         lineHeight: 50,
-        marginTop: 230,
+        marginTop: 250,
         fontFamily: 'Poppins-Bold'
     },
     welcomeInfo: {
         color: COLORS.white,
         textAlign: 'right',
         width: '60%',
-        marginTop: 12,
+        marginTop: 30,
         fontSize: 18,
         fontFamily: 'Poppins-Regular'
     },
     welcomeCards: {
         color: COLORS.white,
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 40,
         fontSize: 8,
         fontFamily: 'Poppins-Italic'
     }
