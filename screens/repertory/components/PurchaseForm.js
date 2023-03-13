@@ -185,6 +185,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Bold',
         textTransform: 'uppercase',
         fontSize: 20,
+        width: '40%',
         marginLeft: 20
     },
     numberOfTickets: {
