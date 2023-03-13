@@ -134,10 +134,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Bold',
         textTransform: 'uppercase',
         fontSize: 20,
+        width: '80%',
         justifyContent: 'flex-start'
     },
     duration: {
-        marginRight: 15,
+        marginLeft: -5,
+        width: '20%',
         fontFamily: 'Poppins-Regular',
     },
     image: {

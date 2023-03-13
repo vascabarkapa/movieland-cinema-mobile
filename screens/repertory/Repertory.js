@@ -111,13 +111,15 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         marginLeft: 20,
         fontSize: 18,
+        width: '80%',
         textTransform: 'uppercase'
     },
     movieRating: {
         fontFamily: 'Poppins-Bold',
-        textAlign: 'right',
-        marginRight: 20,
+        textAlign: 'left',
+        marginLeft: -10,
         fontSize: 18,
+        width: '20%',
         textTransform: 'uppercase'
     },
     movieDescription: {
