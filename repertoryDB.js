@@ -3,6 +3,20 @@ import {images} from "./constants";
 const repertory = [
     {
         id: 1,
+        name: 'Everything Everywhere All at Once',
+        image: images.everythingEverywhereAllAtOnce,
+        genre: 'Action, Adventure, Comedy',
+        description: 'A middle-aged Chinese immigrant is swept up into an insane adventure in which she alone can save existence by exploring other universes and connecting with the lives she could have led.',
+        duration: '2h 19min',
+        direction: 'Daniel Kwan',
+        actors: 'Michelle Yeoh, Stephanie Hsu, Jamie Lee Curtis',
+        rating: 8.0,
+        dateTime: '17.03.2023. 19:30h',
+        numberOfTickets: 220,
+        price: 3.50
+    },
+    {
+        id: 2,
         name: 'The Big Short',
         image: images.dummyTheBigShort,
         genre: 'Comedy, Drama',
@@ -11,12 +25,12 @@ const repertory = [
         direction: 'Vasilije Čabarkapa',
         actors: 'Neven Ivanović, Marko Marković',
         rating: 7.8,
-        dateTime: '02.01.2023. 19:30h',
+        dateTime: '18.03.2023. 19:30h',
         numberOfTickets: 220,
         price: 5.00
     },
     {
-        id: 2,
+        id: 3,
         name: 'Rocky III',
         image: images.dummyRockyIII,
         genre: 'Drama',
@@ -30,7 +44,7 @@ const repertory = [
         price: 3.50
     },
     {
-        id: 3,
+        id: 4,
         name: 'Rush Hour',
         image: images.dummyRushHour,
         genre: 'Drama',
