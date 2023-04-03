@@ -5,6 +5,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { COLORS } from "../../../constants";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimeHelper from '../../../shared/helpers/DateTimeHelper';
+import TicketService from '../../../shared/services/ticket-service';
 
 const PurchaseForm = ({ route, navigation }) => {
     const { selectedRepertory } = route.params;
@@ -40,18 +41,6 @@ const PurchaseForm = ({ route, navigation }) => {
     }
 
     const purchase = () => {
-        console.log('firstName:', firstName);
-        console.log('lastName:', lastName);
-        console.log('email:', email);
-        console.log('phoneNumber:', phoneNumber);
-        console.log('address:', address);
-        console.log('city:', city);
-        console.log('country:', country);
-        console.log('cardType:', cardType);
-        console.log('cardNumber:', cardNumber);
-        console.log('expiryDate:', expiryDate);
-        console.log('ccvNumber:', ccvNumber);
-
         if (firstName === '' || lastName === '' || email === '' || phoneNumber === '' || address === '' || city === '' || country === '' || cardType === '' || cardNumber === '' || expiryDate === '' || ccvNumber === '') {
             Alert.alert(
                 'Error',
@@ -64,16 +53,37 @@ const PurchaseForm = ({ route, navigation }) => {
             return;
         }
 
-        Alert.alert(
-            'Successful Purchase',
-            'Movie ticket purchase is successful. The transaction will be completed shortly and you will receive an email with further information and printable tickets.\n' +
-            '\n' +
-            'Thank you for using our services!',
-            [
-                { text: 'Ok', onPress: () => navigation.navigate('Repertory') },
-            ],
-            { cancelable: false }
-        );
+        const body = JSON.stringify({
+            repertory: selectedRepertory?._id,
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            phone_number: phoneNumber,
+            address: address,
+            city: city,
+            country: country,
+            card_type: cardType,
+            card_number: address,
+            card_date_expiry: city,
+            card_ccv: country,
+            number_of_tickets: numberOfTickets,
+            sum_price: selectedRepertory?.price * numberOfTickets
+        })
+
+        TicketService.createTicket(body).then((response) => {
+            if (response) {
+                Alert.alert(
+                    'Successful Purchase',
+                    'Movie ticket purchase is successful. The transaction will be completed shortly and you will receive an email with further information and printable tickets.\n' +
+                    '\n' +
+                    'Thank you for using our services!',
+                    [
+                        { text: 'Ok', onPress: () => navigation.navigate('Repertory') },
+                    ],
+                    { cancelable: false }
+                );
+            }
+        })
     }
 
     const back = () => {
