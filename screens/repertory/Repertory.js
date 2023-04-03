@@ -8,6 +8,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import RepertoryService from '../../shared/services/repertory-service';
 import { images } from "../../constants";
 import DateTimeHelper from '../../shared/helpers/DateTimeHelper';
+import { ActivityIndicator } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,6 +16,7 @@ const Repertory = () => {
     const navigation = useNavigation();
     const [isLoaded, setIsLoaded] = useState(false);
     const [repertory, setRepertory] = useState([]);
+    const [repertoryLength, setRepertoryLength] = useState();
     /* 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./../../assets/fonts/Poppins-Regular.ttf'),
@@ -73,6 +75,7 @@ const Repertory = () => {
         RepertoryService.getMoviesFromRepertory().then((response) => {
             if (response) {
                 setRepertory(response?.data);
+                setRepertoryLength(response?.data?.length);
                 setIsLoaded(true);
             }
         });
@@ -81,7 +84,10 @@ const Repertory = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.header}>This week in the repertory</Text>
-            <FlatList data={repertory} renderItem={movies} keyExtractor={(item) => item?._id} />
+            {isLoaded ? (repertoryLength > 0 ? <FlatList data={repertory} renderItem={movies} keyExtractor={(item) => item?._id} /> :
+                <Text style={styles.noInfo}>There are no movies available in cinema this week. Visit us again soon!</Text>) : <View style={[styles.activityHorizontal]}>
+                <ActivityIndicator color={COLORS.secondary} size="large" />
+            </View>}
         </View>
     );
 };
@@ -92,6 +98,11 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 40,
         backgroundColor: COLORS.gray
+    },
+    activityHorizontal: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10,
     },
     header: {
         fontSize: 25,
@@ -125,6 +136,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         width: '80%',
         textTransform: 'uppercase'
+    },
+    noInfo: {
+        fontFamily: 'Poppins-Regular',
+        marginTop: 'auto',
+        marginBottom: 'auto',
+        textAlign: 'center',
+        fontSize: 18,
     },
     movieRating: {
         fontFamily: 'Poppins-Bold',
