@@ -6,10 +6,12 @@ import { COLORS } from "../../../constants";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimeHelper from '../../../shared/helpers/DateTimeHelper';
 import TicketService from '../../../shared/services/ticket-service';
+import { ActivityIndicator } from 'react-native';
 
 const PurchaseForm = ({ route, navigation }) => {
     const { selectedRepertory } = route.params;
     const { numberOfTickets } = route.params;
+    const [isLoading, setIsLoading] = useState(false);
 
     // Form
     const [firstName, setFirstName] = useState('');
@@ -41,6 +43,7 @@ const PurchaseForm = ({ route, navigation }) => {
     }
 
     const purchase = () => {
+        setIsLoading(true);
         if (firstName === '' || lastName === '' || email === '' || phoneNumber === '' || address === '' || city === '' || country === '' || cardType === '' || cardNumber === '' || expiryDate === '' || ccvNumber === '') {
             Alert.alert(
                 'Error',
@@ -50,6 +53,7 @@ const PurchaseForm = ({ route, navigation }) => {
                 ],
                 { cancelable: false }
             );
+            setIsLoading(false);
             return;
         }
 
@@ -72,6 +76,7 @@ const PurchaseForm = ({ route, navigation }) => {
 
         TicketService.createTicket(body).then((response) => {
             if (response) {
+                setIsLoading(false);
                 Alert.alert(
                     'Successful Purchase',
                     'Movie ticket purchase is successful. The transaction will be completed shortly and you will receive an email with further information and printable tickets.\n' +
@@ -161,11 +166,11 @@ const PurchaseForm = ({ route, navigation }) => {
                     onChangeText={(ccvNumber) => setCcvNumber(ccvNumber)} />
 
                 <View style={styles.buttonRow}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={back}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={back} disabled={isLoading}>
                         <Text style={styles.buttonText}>Cancel</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buyButton} onPress={purchase}>
-                        <Text style={styles.buttonText}>Buy</Text>
+                    <TouchableOpacity style={styles.buyButton} onPress={purchase} disabled={isLoading}>
+                        {!isLoading ? <Text style={styles.buttonText}>Buy</Text> : <ActivityIndicator color={COLORS.secondary} />}
                     </TouchableOpacity>
                 </View>
             </ScrollView>
