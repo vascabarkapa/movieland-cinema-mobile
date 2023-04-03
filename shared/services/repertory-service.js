@@ -3,16 +3,11 @@ import { get } from "./api-client";
 const ENDPOINT = "/repertories";
 
 function getMoviesFromRepertory() {
-    return get(ENDPOINT);
-}
-
-function getMovieByIdFromRepertory(id) {
-    return get(ENDPOINT + "/" + id);
+    return get(ENDPOINT + "/mobile/get");
 }
 
 const RepertoryService = {
-    getMoviesFromRepertory,
-    getMovieByIdFromRepertory
+    getMoviesFromRepertory
 }
 
 export default RepertoryService;

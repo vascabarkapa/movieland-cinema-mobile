@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import repertoryDB from "../../../repertoryDB";
 import { Image, Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
 import { COLORS, images } from "../../../constants";
 import { useFonts } from 'expo-font';
