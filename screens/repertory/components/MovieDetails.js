@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import repertoryDB from "../../../repertoryDB";
 import {Image, Text, TextInput, TouchableOpacity, View, StyleSheet} from "react-native";
-import {COLORS} from "../../../constants";
+import {COLORS, images} from "../../../constants";
 import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -10,8 +10,7 @@ SplashScreen.preventAutoHideAsync();
 
 const MovieDetails = ({route, navigation}) => {
     const [numberOfTickets, setNumberOfTickets] = useState(1);
-    const {movieId} = route.params;
-    const selectedMovie = repertoryDB.find(movies => movies.id === movieId);
+    const {selectedRepertory} = route.params;
 
     const [fontsLoaded] = useFonts({
         'Poppins-Regular': require('./../../../assets/fonts/Poppins-Regular.ttf'),
@@ -29,7 +28,7 @@ const MovieDetails = ({route, navigation}) => {
     }
 
     const purchase = () => {
-        navigation.navigate('PurchaseForm', {selectedMovie, numberOfTickets});
+        navigation.navigate('PurchaseForm', {selectedRepertory, numberOfTickets});
     }
 
     const back = () => {
@@ -38,35 +37,35 @@ const MovieDetails = ({route, navigation}) => {
 
     return (
         <View style={styles.container} onLayout={onLayoutRootView}>
-            <Image style={styles.image} source={selectedMovie.image}/>
+            <Image style={styles.image} source={images.testMovie}/>
             <View style={styles.secondContainer}>
                 <View style={styles.mainRow}>
                     <Text style={styles.title}>
-                        {selectedMovie.name}
+                        {selectedRepertory?.movie?.name}
                     </Text>
                     <Text style={styles.duration}>
-                        {selectedMovie.duration}
+                        {selectedRepertory?.movie?.duration}
                     </Text>
                 </View>
                 <View style={styles.mainRow}>
                     <Text style={styles.genre}>
-                        {selectedMovie.genre}
+                        {selectedRepertory?.movie?.genre}
                     </Text>
                     <Text style={styles.rating}>
                         <Ionicons name="star" size={14}
-                                  color={COLORS.secondary}/>&nbsp;{selectedMovie.rating.toFixed(1)}
+                                  color={COLORS.secondary}/>&nbsp;{selectedRepertory?.movie?.rating.toFixed(1)}
                     </Text>
                 </View>
                 <View style={styles.secondaryRow}>
                     <Text style={styles.direction}>
-                        <Text style={styles.boldText}>Direction:&nbsp;</Text><Text>{selectedMovie.direction}</Text>
+                        <Text style={styles.boldText}>Direction:&nbsp;</Text><Text>{selectedRepertory?.movie?.direction}</Text>
                     </Text>
                     <Text style={styles.actors}>
-                        <Text style={styles.boldText}>Actors:&nbsp;</Text><Text>{selectedMovie.actors}</Text>
+                        <Text style={styles.boldText}>Actors:&nbsp;</Text><Text>{selectedRepertory?.movie?.actors}</Text>
                     </Text>
                 </View>
                 <Text style={styles.description}>
-                    {selectedMovie.description}
+                    {selectedRepertory?.movie?.description}
                 </Text>
                 <View style={styles.descriptionContainer}></View>
                 <View style={styles.purchaseRow}>
@@ -77,7 +76,7 @@ const MovieDetails = ({route, navigation}) => {
                                    value={numberOfTickets.toString()} selectTextOnFocus={true} keyboardType='numeric'/>
                     </View>
                     <Text style={styles.price}>
-                        Total Price:&nbsp;{(selectedMovie.price * numberOfTickets).toFixed(2)}&euro;
+                        Total Price:&nbsp;{(selectedRepertory?.price * numberOfTickets).toFixed(2)}&euro;
                     </Text>
                 </View>
                 <View style={styles.buttonRow}>
