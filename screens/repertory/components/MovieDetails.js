@@ -1,16 +1,16 @@
-import React, {useCallback, useState} from 'react';
+import React, { useCallback, useState } from 'react';
 import repertoryDB from "../../../repertoryDB";
-import {Image, Text, TextInput, TouchableOpacity, View, StyleSheet} from "react-native";
-import {COLORS, images} from "../../../constants";
-import {useFonts} from 'expo-font';
+import { Image, Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
+import { COLORS, images } from "../../../constants";
+import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 SplashScreen.preventAutoHideAsync();
 
-const MovieDetails = ({route, navigation}) => {
+const MovieDetails = ({ route, navigation }) => {
     const [numberOfTickets, setNumberOfTickets] = useState(1);
-    const {selectedRepertory} = route.params;
+    const { selectedRepertory } = route.params;
 
     const [fontsLoaded] = useFonts({
         'Poppins-Regular': require('./../../../assets/fonts/Poppins-Regular.ttf'),
@@ -28,7 +28,7 @@ const MovieDetails = ({route, navigation}) => {
     }
 
     const purchase = () => {
-        navigation.navigate('PurchaseForm', {selectedRepertory, numberOfTickets});
+        navigation.navigate('PurchaseForm', { selectedRepertory, numberOfTickets });
     }
 
     const back = () => {
@@ -37,7 +37,7 @@ const MovieDetails = ({route, navigation}) => {
 
     return (
         <View style={styles.container} onLayout={onLayoutRootView}>
-            <Image style={styles.image} source={images.testMovie}/>
+            <Image style={styles.image} source={images.testMovie} />
             <View style={styles.secondContainer}>
                 <View style={styles.mainRow}>
                     <Text style={styles.title}>
@@ -53,7 +53,7 @@ const MovieDetails = ({route, navigation}) => {
                     </Text>
                     <Text style={styles.rating}>
                         <Ionicons name="star" size={14}
-                                  color={COLORS.secondary}/>&nbsp;{selectedRepertory?.movie?.rating.toFixed(1)}
+                            color={COLORS.secondary} />&nbsp;{selectedRepertory?.movie?.rating.toFixed(1)}
                     </Text>
                 </View>
                 <View style={styles.secondaryRow}>
@@ -72,8 +72,8 @@ const MovieDetails = ({route, navigation}) => {
                     <View style={styles.rowDirection}>
                         <Text style={styles.quantity}>Number of tickets: </Text>
                         <TextInput style={styles.quantityInput} onChangeText={num => setNumberOfTickets(num)}
-                                   selectionColor={COLORS.secondary}
-                                   value={numberOfTickets.toString()} selectTextOnFocus={true} keyboardType='numeric'/>
+                            selectionColor={COLORS.secondary}
+                            value={numberOfTickets.toString()} selectTextOnFocus={true} keyboardType='numeric' />
                     </View>
                     <Text style={styles.price}>
                         Total Price:&nbsp;{(selectedRepertory?.price * numberOfTickets).toFixed(2)}&euro;

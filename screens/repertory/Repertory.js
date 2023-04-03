@@ -15,21 +15,21 @@ const Repertory = () => {
     const navigation = useNavigation();
     const [isLoaded, setIsLoaded] = useState(false);
     const [repertory, setRepertory] = useState([]);
-/* 
-    const [fontsLoaded] = useFonts({
-        'Poppins-Regular': require('./../../assets/fonts/Poppins-Regular.ttf'),
-        'Poppins-Bold': require('./../../assets/fonts/Poppins-Bold.ttf')
-    });
-
-    const onLayoutRootView = useCallback(async () => {
-        if (fontsLoaded) {
-            await SplashScreen.hideAsync();
-        }
-    }, [fontsLoaded]);
-
-    if (!fontsLoaded) {
-        return null;
-    } */
+    /* 
+        const [fontsLoaded] = useFonts({
+            'Poppins-Regular': require('./../../assets/fonts/Poppins-Regular.ttf'),
+            'Poppins-Bold': require('./../../assets/fonts/Poppins-Bold.ttf')
+        });
+    
+        const onLayoutRootView = useCallback(async () => {
+            if (fontsLoaded) {
+                await SplashScreen.hideAsync();
+            }
+        }, [fontsLoaded]);
+    
+        if (!fontsLoaded) {
+            return null;
+        } */
 
     const movies = ({ item }) => {
         return (

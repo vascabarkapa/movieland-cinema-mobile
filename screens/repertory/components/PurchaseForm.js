@@ -1,13 +1,14 @@
-import React, {useCallback, useState} from 'react';
-import {Text, View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Alert} from "react-native";
-import {useFonts} from "expo-font";
+import React, { useCallback, useState } from 'react';
+import { Text, View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import {COLORS} from "../../../constants";
+import { COLORS } from "../../../constants";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import DateTimeHelper from '../../../shared/helpers/DateTimeHelper';
 
-const PurchaseForm = ({route, navigation}) => {
-    const {selectedMovie} = route.params;
-    const {numberOfTickets} = route.params;
+const PurchaseForm = ({ route, navigation }) => {
+    const { selectedRepertory } = route.params;
+    const { numberOfTickets } = route.params;
 
     // Form
     const [firstName, setFirstName] = useState('');
@@ -56,9 +57,9 @@ const PurchaseForm = ({route, navigation}) => {
                 'Error',
                 'Please enter all fields to purchase tickets!',
                 [
-                    {text: 'Ok'},
+                    { text: 'Ok' },
                 ],
-                {cancelable: false}
+                { cancelable: false }
             );
             return;
         }
@@ -69,9 +70,9 @@ const PurchaseForm = ({route, navigation}) => {
             '\n' +
             'Thank you for using our services!',
             [
-                {text: 'Ok', onPress: () => navigation.navigate('Repertory')},
+                { text: 'Ok', onPress: () => navigation.navigate('Repertory') },
             ],
-            {cancelable: false}
+            { cancelable: false }
         );
     }
 
@@ -84,70 +85,70 @@ const PurchaseForm = ({route, navigation}) => {
             <ScrollView>
                 <Text style={styles.header}>Buy tickets</Text>
                 <View style={styles.inline}>
-                    <Text style={styles.title}>{selectedMovie.name}</Text>
+                    <Text style={styles.title}>{selectedRepertory?.movie?.name}</Text>
                     <Text style={styles.numberOfTickets}>Number of tickets:&nbsp;{numberOfTickets}</Text>
                 </View>
 
                 <View style={styles.inline}>
                     <Text style={styles.dateTime}><Ionicons name="alarm" size={16}
-                                                            color={COLORS.secondary}/>&nbsp;{selectedMovie.dateTime}
+                        color={COLORS.secondary} />&nbsp;{DateTimeHelper.convertToLocalFormat(selectedRepertory?.dateTime)}
                     </Text>
                     <Text style={styles.price}>Total
-                        price:&nbsp;{(selectedMovie.price * numberOfTickets).toFixed(2)}&euro;</Text>
+                        price:&nbsp;{(selectedRepertory?.price * numberOfTickets).toFixed(2)}&euro;</Text>
                 </View>
 
                 <Text style={styles.sector}>Personal data</Text>
 
                 <Text style={styles.label}>First Name</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           value={firstName} onChangeText={(firstName) => setFirstName(firstName)}/>
+                    value={firstName} onChangeText={(firstName) => setFirstName(firstName)} />
 
                 <Text style={styles.label}>Last Name</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           value={lastName} onChangeText={(lastName) => setLastName(lastName)}/>
+                    value={lastName} onChangeText={(lastName) => setLastName(lastName)} />
 
                 <Text style={styles.label}>Email</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           keyboardType='email-address' value={email}
-                           onChangeText={(email) => setEmail(email)}/>
+                    keyboardType='email-address' value={email}
+                    onChangeText={(email) => setEmail(email)} />
 
                 <Text style={styles.label}>Phone number</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           keyboardType='phone-pad' value={phoneNumber}
-                           onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}/>
+                    keyboardType='phone-pad' value={phoneNumber}
+                    onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)} />
 
                 <Text style={styles.label}>Address</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           value={address} onChangeText={(address) => setAddress(address)}/>
+                    value={address} onChangeText={(address) => setAddress(address)} />
 
                 <Text style={styles.label}>City</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           value={city} onChangeText={(city) => setCity(city)}/>
+                    value={city} onChangeText={(city) => setCity(city)} />
 
                 <Text style={styles.label}>Country</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           value={country} onChangeText={(country) => setCountry(country)}/>
+                    value={country} onChangeText={(country) => setCountry(country)} />
 
                 <Text style={styles.sector}>Card data</Text>
 
                 <Text style={styles.label}>Card Type</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           value={cardType} onChangeText={(cardType) => setCardType(cardType)}/>
+                    value={cardType} onChangeText={(cardType) => setCardType(cardType)} />
 
                 <Text style={styles.label}>Card Number</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           keyboardType='numeric' value={cardNumber}
-                           onChangeText={(cardNumber) => setCardNumber(cardNumber)}/>
+                    keyboardType='numeric' value={cardNumber}
+                    onChangeText={(cardNumber) => setCardNumber(cardNumber)} />
 
                 <Text style={styles.label}>Expiry Date</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           keyboardType='numeric' value={expiryDate}
-                           onChangeText={(expiryDate) => setExpiryDate(expiryDate)}/>
+                    keyboardType='numeric' value={expiryDate}
+                    onChangeText={(expiryDate) => setExpiryDate(expiryDate)} />
 
                 <Text style={styles.label}>CCV number</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
-                           keyboardType='numeric' value={ccvNumber}
-                           onChangeText={(ccvNumber) => setCcvNumber(ccvNumber)}/>
+                    keyboardType='numeric' value={ccvNumber}
+                    onChangeText={(ccvNumber) => setCcvNumber(ccvNumber)} />
 
                 <View style={styles.buttonRow}>
                     <TouchableOpacity style={styles.cancelButton} onPress={back}>
