@@ -8,13 +8,14 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import RepertoryService from '../../shared/services/repertory-service';
 import { images } from "../../constants";
 import DateTimeHelper from '../../shared/helpers/DateTimeHelper';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, RefreshControl } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
 const Repertory = () => {
     const navigation = useNavigation();
     const [isLoaded, setIsLoaded] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
     const [repertory, setRepertory] = useState([]);
     const [repertoryLength, setRepertoryLength] = useState();
     /* 
@@ -32,6 +33,20 @@ const Repertory = () => {
         if (!fontsLoaded) {
             return null;
         } */
+
+    const onRefresh = () => {
+        setRefreshing(true);
+
+        RepertoryService.getMoviesFromRepertory().then((response) => {
+            if (response) {
+                setRepertory(response?.data);
+                setRepertoryLength(response?.data?.length);
+                setIsLoaded(true);
+            }
+        });
+
+        setRefreshing(false);
+    };
 
     const movies = ({ item }) => {
         return (
@@ -84,7 +99,14 @@ const Repertory = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.header}>This week in the repertory</Text>
-            {isLoaded ? (repertoryLength > 0 ? <FlatList data={repertory} renderItem={movies} keyExtractor={(item) => item?._id} /> :
+            {isLoaded ? (repertoryLength > 0 ? <FlatList
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }
+                data={repertory}
+                renderItem={movies}
+                keyExtractor={(item) => item?._id}
+            /> :
                 <Text style={styles.noInfo}>There are no movies available in cinema this week. Visit us again soon!</Text>) : <View style={[styles.activityHorizontal]}>
                 <ActivityIndicator color={COLORS.secondary} size="large" />
             </View>}
