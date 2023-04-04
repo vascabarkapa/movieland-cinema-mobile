@@ -9,6 +9,7 @@ import RepertoryService from '../../shared/services/repertory-service';
 import { images } from "../../constants";
 import DateTimeHelper from '../../shared/helpers/DateTimeHelper';
 import { ActivityIndicator, RefreshControl } from 'react-native';
+import { ScrollView } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -107,7 +108,14 @@ const Repertory = () => {
                 renderItem={movies}
                 keyExtractor={(item) => item?._id}
             /> :
-                <Text style={styles.noInfo}>There are no movies available in cinema this week. Visit us again soon!</Text>) : <View style={[styles.activityHorizontal]}>
+                <ScrollView style={styles.noInfoView}
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
+                >
+                    <Text style={styles.noInfo}>There are no movies available in cinema this week. Visit us again soon!</Text>
+                </ScrollView>
+            ) : <View style={[styles.activityHorizontal]}>
                 <ActivityIndicator color={COLORS.secondary} size="large" />
             </View>}
         </View>
@@ -159,10 +167,11 @@ const styles = StyleSheet.create({
         width: '80%',
         textTransform: 'uppercase'
     },
+    noInfoView: {
+        paddingTop: '80%',
+    },
     noInfo: {
         fontFamily: 'Poppins-Regular',
-        marginTop: 'auto',
-        marginBottom: 'auto',
         textAlign: 'center',
         fontSize: 18,
     },
