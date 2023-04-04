@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity } from "react-native";
 import { COLORS } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
-import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import RepertoryService from '../../shared/services/repertory-service';
@@ -19,21 +18,16 @@ const Repertory = () => {
     const [refreshing, setRefreshing] = useState(false);
     const [repertory, setRepertory] = useState([]);
     const [repertoryLength, setRepertoryLength] = useState();
-    /* 
-        const [fontsLoaded] = useFonts({
-            'Poppins-Regular': require('./../../assets/fonts/Poppins-Regular.ttf'),
-            'Poppins-Bold': require('./../../assets/fonts/Poppins-Bold.ttf')
-        });
-    
-        const onLayoutRootView = useCallback(async () => {
-            if (fontsLoaded) {
-                await SplashScreen.hideAsync();
+
+    useEffect(() => {
+        RepertoryService.getMoviesFromRepertory().then((response) => {
+            if (response) {
+                setRepertory(response?.data);
+                setRepertoryLength(response?.data?.length);
+                setIsLoaded(true);
             }
-        }, [fontsLoaded]);
-    
-        if (!fontsLoaded) {
-            return null;
-        } */
+        });
+    }, []);
 
     const onRefresh = () => {
         setRefreshing(true);
@@ -51,7 +45,7 @@ const Repertory = () => {
 
     const movies = ({ item }) => {
         return (
-            <View style={styles.movies} /* onLayout={onLayoutRootView} */>
+            <View style={styles.movies}>
                 <View style={styles.imageContainer}>
                     <Image style={styles.movieImage} source={images.testMovie} />
                 </View>
@@ -86,16 +80,6 @@ const Repertory = () => {
             </View>
         )
     };
-
-    useEffect(() => {
-        RepertoryService.getMoviesFromRepertory().then((response) => {
-            if (response) {
-                setRepertory(response?.data);
-                setRepertoryLength(response?.data?.length);
-                setIsLoaded(true);
-            }
-        });
-    }, []);
 
     return (
         <View style={styles.container}>
