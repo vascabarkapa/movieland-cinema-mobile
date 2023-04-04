@@ -72,7 +72,8 @@ const MovieDetails = ({ route, navigation }) => {
                         <Text style={styles.quantity}>Number of tickets: </Text>
                         <TextInput style={styles.quantityInput} onChangeText={num => setNumberOfTickets(num)}
                             selectionColor={COLORS.secondary}
-                            value={numberOfTickets.toString()} selectTextOnFocus={true} keyboardType='numeric' />
+                            value={numberOfTickets.toString()} selectTextOnFocus={true} keyboardType='numeric'
+                            editable={selectedRepertory?.number_of_tickets > 0} />
                     </View>
                     <Text style={styles.price}>
                         Total Price:&nbsp;{(selectedRepertory?.price * numberOfTickets).toFixed(2)}&euro;
@@ -82,8 +83,11 @@ const MovieDetails = ({ route, navigation }) => {
                     <TouchableOpacity onPress={back} style={styles.buttonBack}>
                         <Text style={styles.buttonText}>Back</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={purchase} style={styles.buttonBuy}>
-                        <Text style={styles.buttonText}>Buy Now</Text>
+                    <TouchableOpacity onPress={purchase} disabled={selectedRepertory?.number_of_tickets <= 0}
+                        style={selectedRepertory?.number_of_tickets > 0 ? styles.buttonBuy
+                            : styles.buttonBuySold}>
+                        {selectedRepertory?.number_of_tickets > 0 ? <Text style={styles.buttonText}>Buy Now</Text>
+                            : <Text style={styles.buttonText}>SOLD!</Text>}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -187,6 +191,12 @@ const styles = StyleSheet.create({
     },
     buttonBuy: {
         backgroundColor: COLORS.secondary,
+        width: '30%',
+        borderRadius: 20,
+        marginLeft: 10,
+    },
+    buttonBuySold: {
+        backgroundColor: 'red',
         width: '30%',
         borderRadius: 20,
         marginLeft: 10,
