@@ -67,9 +67,9 @@ const PurchaseForm = ({ route, navigation }) => {
             city: city,
             country: country,
             card_type: cardType,
-            card_number: address,
-            card_date_expiry: city,
-            card_ccv: country,
+            card_number: cardNumber,
+            card_date_expiry: expiryDate,
+            card_ccv: ccvNumber,
             number_of_tickets: numberOfTickets,
             sum_price: selectedRepertory?.price * numberOfTickets
         })
