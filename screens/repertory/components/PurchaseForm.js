@@ -42,6 +42,14 @@ const PurchaseForm = ({ route, navigation }) => {
         return null;
     }
 
+    const handleExpireDate = (input) => {
+        if (input.length === 2 && expiryDate.length === 1) {
+            input += '/';
+        }
+
+        setExpiryDate(input);
+    }
+
     const purchase = () => {
         setIsLoading(true);
         if (firstName === '' || lastName === '' || email === '' || phoneNumber === '' || address === '' || city === '' || country === '' || cardType === '' || cardNumber === '' || expiryDate === '' || ccvNumber === '') {
@@ -158,7 +166,7 @@ const PurchaseForm = ({ route, navigation }) => {
                 <Text style={styles.label}>Expiry Date</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
                     keyboardType='numeric' value={expiryDate}
-                    onChangeText={(expiryDate) => setExpiryDate(expiryDate)} />
+                    onChangeText={handleExpireDate} />
 
                 <Text style={styles.label}>CCV number</Text>
                 <TextInput style={styles.input} selectTextOnFocus={true} selectionColor={COLORS.secondary}
