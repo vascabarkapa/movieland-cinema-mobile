@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Image, Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View, StyleSheet, Alert } from "react-native";
 import { COLORS, images } from "../../../constants";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -27,7 +27,18 @@ const MovieDetails = ({ route, navigation }) => {
     }
 
     const purchase = () => {
-        navigation.navigate('PurchaseForm', { selectedRepertory, numberOfTickets });
+        if (selectedRepertory?.number_of_tickets - numberOfTickets >= 0) {
+            navigation.navigate('PurchaseForm', { selectedRepertory, numberOfTickets });
+        } else {
+            Alert.alert(
+                'Error',
+                'Purchase is not possible!\n' + 'Cards left: ' + selectedRepertory?.number_of_tickets,
+                [
+                    { text: 'Ok' },
+                ],
+                { cancelable: false }
+            );
+        }
     }
 
     const back = () => {
