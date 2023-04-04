@@ -52,10 +52,25 @@ const PurchaseForm = ({ route, navigation }) => {
 
     const purchase = () => {
         setIsLoading(true);
+
         if (firstName === '' || lastName === '' || email === '' || phoneNumber === '' || address === '' || city === '' || country === '' || cardType === '' || cardNumber === '' || expiryDate === '' || ccvNumber === '') {
             Alert.alert(
                 'Error',
                 'Please enter all fields to purchase tickets!',
+                [
+                    { text: 'Ok' },
+                ],
+                { cancelable: false }
+            );
+            setIsLoading(false);
+            return;
+        }
+
+        const regex = /\S+@\S+\.\S+/;
+        if (!regex.test(email)) {
+            Alert.alert(
+                'Error',
+                'The email is not valid! Check the format.',
                 [
                     { text: 'Ok' },
                 ],
