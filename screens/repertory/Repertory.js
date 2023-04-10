@@ -47,7 +47,7 @@ const Repertory = () => {
         return (
             <View style={styles.movies}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.movieImage} source={images.testMovie} />
+                    <Image style={styles.movieImage} source={item?.movie?.image ? { uri: item?.movie?.image } : images.testMovie} />
                 </View>
                 <View>
                     <View style={styles.headerRow}>

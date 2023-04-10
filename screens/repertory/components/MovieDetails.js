@@ -47,7 +47,7 @@ const MovieDetails = ({ route, navigation }) => {
 
     return (
         <View style={styles.container} onLayout={onLayoutRootView}>
-            <Image style={styles.image} source={images.testMovie} />
+            <Image style={styles.image} source={selectedRepertory?.movie?.image ? { uri: selectedRepertory?.movie?.image } : images.testMovie} />
             <View style={styles.secondContainer}>
                 <View style={styles.mainRow}>
                     <Text style={styles.title}>
