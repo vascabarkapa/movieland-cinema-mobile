@@ -23,7 +23,7 @@ npm install
 
 Start the Expo development server:
 ```
-npm start
+npx expo start
 ```
 
 Download the Expo client app on your iOS or Android device. Scan the QR code displayed on the terminal with the Expo app on your mobile device to open the app.
