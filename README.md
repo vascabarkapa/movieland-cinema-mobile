@@ -42,5 +42,5 @@ The app is built to scale, making it capable of handling a large volume of users
 With the Movieland Cinema mobile app, customers can reserve and purchase tickets in just a few taps, ensuring a seamless cinema experience.
 
 ## Feedback
-If you have any feedback, please reach out to us at vascabarkapa@gmail.com. Made in 2023.
+If you have any feedback, please reach out to us at vascabarkapa@gmail.com.
 
